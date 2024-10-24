@@ -1,7 +1,22 @@
 const addNoteBtn = document.querySelector("#add-note");
 const notesList = document.querySelector("#notes-list");
 
-function makeNote(title, description) {
+const noteForm = {
+    title: document.querySelector("#note-title"),
+    description: document.querySelector("#note-description"),
+    update: function() {
+        this.title = document.querySelector("#note-title");
+        this.description = document.querySelector("#note-description");
+    },
+
+}
+
+addNoteBtn.addEventListener('click', (()=>{
+    noteForm.update();
+    makeNote(noteForm)}
+))
+
+function newNote(title, description) {
     const note = {
         title,
         description
@@ -34,4 +49,11 @@ function addNote(note) /* to dom */ {
             this.descriptionNode.textContent = note.description;
         }
     };
+}
+
+function makeNote(form) {
+    addNote(
+        newNote(form.title.value, form.description.value)
+    )
+    console.warn(form.title.value);
 }
